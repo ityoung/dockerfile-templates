@@ -1,0 +1,16 @@
+FROM node:alpine
+
+LABEL author.name="Shin Yang" \
+      author.email="ityoung@foxmail.com" \
+      version="0.1" \
+      description="Dockerfile Template of Updating Alpine."
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+  && apk update \
+  && apk add --no-cache git \
+  && rm /var/cache/apk/*
+
+
+# or use `--no-cache`:
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+#   && apk add --no-cache git
